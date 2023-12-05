@@ -151,7 +151,7 @@ Vendor:   cPanel, Inc.
 Name:     %{?scl_prefix}php
 Version:  7.1.33
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4588 for more details
-%define release_prefix 16
+%define release_prefix 17
 Release:  %{release_prefix}%{?dist}.cpanel
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
@@ -196,6 +196,7 @@ Patch401: 0011-0021-PLESK-avoid-child-ignorance.patch
 Patch402: 0012-0022-PLESK-missed-kill.patch
 Patch403: 0013-php-5.6.3-datetests.centos.patch
 Patch404: 0014-php-7.0.0-oldpcre.centos.patch
+Patch405: 0015-Update-libxml-include-file-references.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -1013,6 +1014,7 @@ inside them.
 %patch402 -p1 -b .missedkill
 %patch403 -p1 -b .datetests
 %patch404 -p1 -b .oldpcre
+%patch405 -p1 -b .libxml
 
 # Prevent %%doc confusion over LICENSE files
 cp Zend/LICENSE Zend/ZEND_LICENSE
@@ -1880,6 +1882,9 @@ fi
 
 
 %changelog
+* Tue Nov 21 2023 Tim Mullin <tim@cpanel.net> - 7.1.33-17
+- EA-11821: Patch to build with the latest ea-libxml2
+
 * Wed May 17 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 7.1.33-16
 - ZC-10950: Add debug_package nil back w/ second directive (3rd item will be ZC-10951)
 
